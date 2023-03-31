@@ -26,57 +26,94 @@ public class JanelaCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jMenu1 = new javax.swing.JMenu();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        mnuCadastro = new javax.swing.JMenu();
+        mnuCadastroCliente = new javax.swing.JMenuItem();
+        mnuConsultaCliente = new javax.swing.JMenuItem();
+        mnuAlterarCliente = new javax.swing.JMenuItem();
+        mnuDeletarCliente = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mnuCadastroProduto = new javax.swing.JMenuItem();
+        mnuConsultaProduto = new javax.swing.JMenuItem();
+        mnuAlterarProduto = new javax.swing.JMenuItem();
+        mnuDeletarProduto = new javax.swing.JMenuItem();
+
+        jMenu1.setText("jMenu1");
+
+        jCheckBoxMenuItem2.setSelected(true);
+        jCheckBoxMenuItem2.setText("jCheckBoxMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Cliente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        mnuCadastro.setText("Cliente");
 
-        jButton2.setText("Produto");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        mnuCadastroCliente.setText("Cadastro");
+        mnuCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                mnuCadastroClienteActionPerformed(evt);
             }
         });
+        mnuCadastro.add(mnuCadastroCliente);
+
+        mnuConsultaCliente.setText("Consulta");
+        mnuCadastro.add(mnuConsultaCliente);
+
+        mnuAlterarCliente.setText("Alterar");
+        mnuCadastro.add(mnuAlterarCliente);
+
+        mnuDeletarCliente.setText("Deletar");
+        mnuCadastro.add(mnuDeletarCliente);
+
+        jMenuBar1.add(mnuCadastro);
+
+        jMenu3.setText("Produto");
+
+        mnuCadastroProduto.setText("Cadastro");
+        mnuCadastroProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCadastroProdutoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuCadastroProduto);
+
+        mnuConsultaProduto.setText("Consulta");
+        jMenu3.add(mnuConsultaProduto);
+
+        mnuAlterarProduto.setText("Alterar");
+        jMenu3.add(mnuAlterarProduto);
+
+        mnuDeletarProduto.setText("Deletar");
+        jMenu3.add(mnuDeletarProduto);
+
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+            .addGap(0, 401, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(161, Short.MAX_VALUE))
+            .addGap(0, 277, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void mnuCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadastroClienteActionPerformed
         CadastroCliente cliente = new CadastroCliente();
         cliente.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_mnuCadastroClienteActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void mnuCadastroProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadastroProdutoActionPerformed
+        CadastroProduto produto = new CadastroProduto();
+        produto.setVisible(true);
+    }//GEN-LAST:event_mnuCadastroProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,7 +151,18 @@ public class JanelaCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem mnuAlterarCliente;
+    private javax.swing.JMenuItem mnuAlterarProduto;
+    private javax.swing.JMenu mnuCadastro;
+    private javax.swing.JMenuItem mnuCadastroCliente;
+    private javax.swing.JMenuItem mnuCadastroProduto;
+    private javax.swing.JMenuItem mnuConsultaCliente;
+    private javax.swing.JMenuItem mnuConsultaProduto;
+    private javax.swing.JMenuItem mnuDeletarCliente;
+    private javax.swing.JMenuItem mnuDeletarProduto;
     // End of variables declaration//GEN-END:variables
 }
