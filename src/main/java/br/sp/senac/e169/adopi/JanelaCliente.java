@@ -28,6 +28,7 @@ public class JanelaCliente extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuCadastro = new javax.swing.JMenu();
         mnuCadastroCliente = new javax.swing.JMenuItem();
@@ -39,11 +40,16 @@ public class JanelaCliente extends javax.swing.JFrame {
         mnuConsultaProduto = new javax.swing.JMenuItem();
         mnuAlterarProduto = new javax.swing.JMenuItem();
         mnuDeletarProduto = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
         jCheckBoxMenuItem2.setSelected(true);
         jCheckBoxMenuItem2.setText("jCheckBoxMenuItem2");
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +94,16 @@ public class JanelaCliente extends javax.swing.JFrame {
         jMenu3.add(mnuDeletarProduto);
 
         jMenuBar1.add(jMenu3);
+
+        jMenu2.setText("Vendas");
+
+        jMenuItem2.setText("Compra");
+        jMenu2.add(jMenuItem2);
+
+        jMenuItem3.setText("Consulta");
+        jMenu2.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -153,8 +169,12 @@ public class JanelaCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem mnuAlterarCliente;
     private javax.swing.JMenuItem mnuAlterarProduto;
     private javax.swing.JMenu mnuCadastro;
