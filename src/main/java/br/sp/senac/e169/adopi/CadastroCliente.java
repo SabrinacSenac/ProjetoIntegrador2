@@ -4,6 +4,8 @@
  */
 package br.sp.senac.e169.adopi;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author SABRINA
@@ -263,8 +265,11 @@ public class CadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        ClienteCadastrado cliente = new ClienteCadastrado();
-        cliente.setVisible(true);
+        try {
+            JOptionPane.showMessageDialog(null, "Cliente Cadastrado", "Cadastro de Usuário", JOptionPane.INFORMATION_MESSAGE);
+       } catch (Exception e) {
+           
+       }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
