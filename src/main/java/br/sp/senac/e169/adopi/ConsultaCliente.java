@@ -4,6 +4,8 @@
  */
 package br.sp.senac.e169.adopi;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author SABRINA
@@ -35,6 +37,11 @@ public class ConsultaCliente extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Consulta Clientes");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -119,6 +126,14 @@ public class ConsultaCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try {
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocorreu um Erro", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
