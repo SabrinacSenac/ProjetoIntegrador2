@@ -4,6 +4,8 @@
  */
 package br.sp.senac.e169.adopi;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author SABRINA
@@ -222,9 +224,9 @@ public class CadastroVendas extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            
+            JOptionPane.showMessageDialog(this, "Venda Cadastrada com Sucesso", "Cadastro de Vendas", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            
+            JOptionPane.showMessageDialog(this, "Ocorreu um Erro", "Cadastro de Vendas", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
