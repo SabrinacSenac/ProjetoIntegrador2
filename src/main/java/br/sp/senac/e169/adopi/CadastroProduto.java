@@ -134,14 +134,19 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         try {
-            Validacao.ValidarCamposTexto(txtNome.getText());
-            Validacao.ValidarCamposTexto(txtCategoria.getText());
+            if(txtNome.getText().trim().equals("")) {
+                throw new IllegalArgumentException("Nome Vazio");
+            }
+            if(txtCategoria.getText().trim().equals("")) {
+                throw new IllegalArgumentException("Categoria Vazia");
+            }
+            
+            //Validacao.ValidarCamposTexto(txtNome.getText());
+            //Validacao.ValidarCamposTexto(txtCategoria.getText());
             
             JOptionPane.showMessageDialog(this, "Produto Cadastrado com Sucesso", "Cadastro de Produto", JOptionPane.INFORMATION_MESSAGE);
-        } catch (IllegalArgumentException e) {
-            String mensagemErro = Validacao.getMensagensErro().get(0);
-            
-            JOptionPane.showMessageDialog(this, mensagemErro, "Cadastro de Produto", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException e) {                       
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Cadastro de Produto", JOptionPane.ERROR_MESSAGE);
         }    
         catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocorreu um Erro", "Cadastro de Produto", JOptionPane.ERROR_MESSAGE);

@@ -9,6 +9,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <exec.mainClass>br.sp.senac.e169.adopi.Menu</exec.mainClass>
+        <exec.mainClass>br.sp.senac.e169.adopi.AdoPi</exec.mainClass>
     </properties>
 </project>

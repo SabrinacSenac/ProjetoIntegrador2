@@ -20,7 +20,7 @@ public class Validacao {
     public static void ValidarCamposTexto(String txt) {
         try {
             if (txt.trim().equals("") ){
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(txt + "Inválido");
             }
         } catch (IllegalArgumentException e) {
             listaMensagensErro.add("Campo " + txt + " vazio");

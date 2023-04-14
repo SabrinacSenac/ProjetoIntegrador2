@@ -11,6 +11,7 @@ package br.sp.senac.e169.adopi;
 public class AdoPi {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        JanelaCliente menu = new JanelaCliente();
+        menu.setVisible(true);
     }
 }

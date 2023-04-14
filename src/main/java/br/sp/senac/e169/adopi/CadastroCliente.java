@@ -267,19 +267,32 @@ public class CadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        try {            
-            Validacao.ValidarCamposTexto(txtNome.getText());
-            Validacao.ValidarCamposTexto(txtEstadoCivil.getText());
-            Validacao.ValidarCamposTexto(txtRua.getText());
-            Validacao.ValidarCamposTexto(txtBairro.getText());
-            Validacao.ValidarCamposTexto(txtCidade.getText());
+        try {
+            if(txtNome.getText().trim().equals("")) {
+                throw new IllegalArgumentException("Nome Vazio");
+            }
+            if(txtEstadoCivil.getText().trim().equals("")) {
+                throw new IllegalArgumentException("Estado Civil Vazio");
+            }
+            if(txtRua.getText().trim().equals("")) {
+                throw new IllegalArgumentException("Rua Vazia");
+            }
+            if(txtBairro.getText().trim().equals("")) {
+                throw new IllegalArgumentException("Bairro Vazio");
+            }
+            if(txtCidade.getText().trim().equals("")) {
+                throw new IllegalArgumentException("Cidade Vazia");
+            }
+            
+            //Validacao.ValidarCamposTexto(txtNome.getText());
+            //Validacao.ValidarCamposTexto(txtEstadoCivil.getText());
+            //Validacao.ValidarCamposTexto(txtRua.getText());
+            //Validacao.ValidarCamposTexto(txtBairro.getText());
+            //Validacao.ValidarCamposTexto(txtCidade.getText());
             
             JOptionPane.showMessageDialog(null, "Cliente Cadastrado", "Cadastro de Usuário", JOptionPane.INFORMATION_MESSAGE);
-       } catch (IllegalArgumentException e) {           
-           // Pega o primeiro Item do ArrayList
-           String mensagemErro = Validacao.getMensagensErro().get(0);
-           
-           JOptionPane.showMessageDialog(this, mensagemErro, "Cadastro do Cliente", JOptionPane.ERROR_MESSAGE);
+       } catch (IllegalArgumentException e) {  
+           JOptionPane.showMessageDialog(this, e.getMessage(), "Cadastro do Cliente", JOptionPane.ERROR_MESSAGE);
        }        
        catch (Exception e) {
            JOptionPane.showMessageDialog(this, "Ocorreu um Erro", "Cadastro de Cliente", JOptionPane.ERROR_MESSAGE);
