@@ -5,6 +5,7 @@
 package br.sp.senac.e169.adopi.classes;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 public class Produto {
     public int id;
     public String nome;
-    public LocalDate datafabricacao;
+    public Date datafabricacao;
     public String categoria;
     public int quantidade;
     public float peso;
@@ -35,11 +36,11 @@ public class Produto {
         this.nome = nome;
     }
 
-    public LocalDate getDatafabricacao() {
+    public Date getDatafabricacao() {
         return datafabricacao;
     }
 
-    public void setDatafabricacao(LocalDate datafabricacao) {
+    public void setDatafabricacao(Date datafabricacao) {
         this.datafabricacao = datafabricacao;
     }
 

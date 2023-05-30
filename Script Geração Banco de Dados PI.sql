@@ -5,7 +5,7 @@ Create Database padoca;
 Use padoca;
 
 Create Table cliente (
-	id				Int Primary Key,
+	id				Int Primary Key Auto_Increment,
 	nome			Varchar(100),
     cpf				Char(14),
     telefone		Varchar(20),
@@ -21,7 +21,7 @@ Create Table cliente (
     uf				Char(2));
     
 Create Table produto (
-	id				Int Primary Key,
+	id				Int Primary Key Auto_Increment,
     nome			Varchar(100),
     data_fabricacao	DateTime(2),
     categoria		Varchar(50),
@@ -31,7 +31,7 @@ Create Table produto (
 );
 
 Create Table vendas (
-	id				Int Primary Key,
+	id				Int Primary Key Auto_Increment,
     data_venda		DateTime(2),
     total			Decimal(5,2),
     cliente_id		Int,
@@ -39,7 +39,7 @@ Foreign Key (cliente_id) References cliente(id)
 );
 
 Create Table vendas_produto (
-	id				Int Primary Key,
+	id				Int Primary Key Auto_Increment,
     venda_id		Int,
     produto_id		Int,
 Foreign Key (venda_id) References vendas(id),

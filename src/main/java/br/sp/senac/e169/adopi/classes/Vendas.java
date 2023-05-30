@@ -5,6 +5,7 @@
 package br.sp.senac.e169.adopi.classes;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,8 +14,9 @@ import java.util.List;
  */
 public class Vendas {
     public int id;
-    public LocalDate dataVenda;
+    public Date dataVenda;
     public double total;
+    public int clienteId;
 
     public int getId() {
         return id;
@@ -24,11 +26,11 @@ public class Vendas {
         this.id = id;
     }
 
-    public LocalDate getDataVenda() {
+    public Date getDataVenda() {
         return dataVenda;
     }
 
-    public void setDataVenda(LocalDate dataVenda) {
+    public void setDataVenda(Date dataVenda) {
         this.dataVenda = dataVenda;
     }
 
@@ -38,6 +40,14 @@ public class Vendas {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public int getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(int clienteId) {
+        this.clienteId = clienteId;
     }
 
     public Cliente getCliente() {

@@ -4,7 +4,7 @@
  */
 package br.sp.senac.e169.adopi.classes;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  *
@@ -15,7 +15,7 @@ public class Cliente {
     public String nome;
     public String cpf;
     public String telefone;
-    public LocalDate dataNascimento;
+    public Date dataNascimento;
     public String email;
     public String estadoCivil;
     public String sexo;
@@ -58,11 +58,11 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public LocalDate getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
