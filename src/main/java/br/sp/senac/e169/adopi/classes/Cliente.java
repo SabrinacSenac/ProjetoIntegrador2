@@ -26,6 +26,26 @@ public class Cliente {
     public String cidade;
     public String uf;
 
+    public Cliente() {
+        
+    }   
+    
+    public Cliente(String nome, String cpf, String telefone, Date dataNascimento, String email, String estadoCivil, String sexo, String cep, String rua, int numero, String bairro, String cidade, String uf) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.dataNascimento = dataNascimento;
+        this.email = email;
+        this.estadoCivil = estadoCivil;
+        this.sexo = sexo;
+        this.cep = cep;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+    }
+
     public int getId() {
         return id;
     }
@@ -40,7 +60,7 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
+    }    
 
     public String getCpf() {
         return cpf;

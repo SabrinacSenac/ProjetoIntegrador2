@@ -5,7 +5,9 @@
 package br.sp.senac.e169.adopi;
 
 import br.sp.senac.e169.adopi.classes.*;
+import br.sp.senac.e169.adopi.dao.ClienteDao;
 import br.sp.senac.e169.adopi.utils.validacoes.Validacao;
+import java.util.Date;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
@@ -323,9 +325,24 @@ public class CadastroCliente extends javax.swing.JFrame {
                 String nome = txtNome.getText();
                 String cpf = txtCPF.getText();
                 String telefone = txtTelefone.getText();
-            }
+                Date dataNascimento = jdcData.getDate();
+                String email = txtEmail.getText();
+                String estadoCivil = txtEstadoCivil.getText();
+                String sexo = cmbSexo.getSelectedItem().toString();
+                String cep = txtCEP.getText();
+                String rua = txtRua.getText();
+                int numero = Integer.parseInt(txtNumero.getText());
+                String bairro = txtBairro.getText();
+                String cidade = txtCidade.getText();
+                String uf = cmbUF.getSelectedItem().toString();
+                
+                Cliente cliente = new Cliente(nome, cpf, telefone, dataNascimento, email, estadoCivil, sexo, cep, rua, numero, bairro, cidade, uf);
+                
+                ClienteDao.salvar(cliente);
+                
+                JOptionPane.showMessageDialog(null, "Cliente Cadastrado", "Cadastro de Usuário", JOptionPane.INFORMATION_MESSAGE);
+            }           
             
-            JOptionPane.showMessageDialog(null, "Cliente Cadastrado", "Cadastro de Usuário", JOptionPane.INFORMATION_MESSAGE);
        } catch (IllegalArgumentException e) {  
            JOptionPane.showMessageDialog(this, e.getMessage(), "Cadastro do Cliente", JOptionPane.ERROR_MESSAGE);
        }        

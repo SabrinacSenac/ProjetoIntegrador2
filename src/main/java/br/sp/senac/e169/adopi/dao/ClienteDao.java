@@ -24,7 +24,7 @@ public class ClienteDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3307/padoca";
+            String url = "jdbc:mysql://localhost:3306/padoca";
             conexao = DriverManager.getConnection(url, "root", "123456789");
             
             //Passo 3 - Preparar o comando SQL
@@ -70,7 +70,7 @@ public class ClienteDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3307/padoca";
+            String url = "jdbc:mysql://localhost:3306/padoca";
             conexao = DriverManager.getConnection(url, "root", "123456789");
             
             //Passo 3 - Preparar o comando SQL
@@ -126,7 +126,7 @@ public class ClienteDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3307/padoca";
+            String url = "jdbc:mysql://localhost:3306/padoca";
             conexao = DriverManager.getConnection(url, "root", "123456789");
             
             //Passo 3 - Preparar o comando SQL
