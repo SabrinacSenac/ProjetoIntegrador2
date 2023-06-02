@@ -23,14 +23,14 @@ public class VendasDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3307/padoca";
+            String url = "jdbc:mysql://localhost:3306/padoca";
             conexao = DriverManager.getConnection(url, "root", "123456789");
             
             //Passo 3 - Preparar o comando SQL
             PreparedStatement comandoSQL = 
-                conexao.prepareStatement("INSERT INTO Produto (data_venda,total,cliente_id) "
+                conexao.prepareStatement("INSERT INTO vendas (data_venda,total,cliente_id) "
                                         + " VALUES(?,?,?)");
-            comandoSQL.setDate(1, (Date) pObj.getDataVenda());
+            comandoSQL.setDate(1, new java.sql.Date(pObj.getDataVenda().getTime()));
             comandoSQL.setDouble(2, pObj.getTotal());
             comandoSQL.setInt(3, pObj.getClienteId());
                     
@@ -44,7 +44,7 @@ public class VendasDao {
         } catch (ClassNotFoundException ex) {
             System.out.println("Erro ao carregar o Driver");
         } catch (SQLException ex) {
-            System.out.println("Erro no SQL");
+            System.out.println(ex.getMessage());
         }
         
         return retorno;
@@ -59,7 +59,7 @@ public class VendasDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3307/padoca";
+            String url = "jdbc:mysql://localhost:3306/padoca";
             conexao = DriverManager.getConnection(url, "root", "123456789");
             
             //Passo 3 - Preparar o comando SQL
@@ -104,14 +104,14 @@ public class VendasDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3307/padoca";
+            String url = "jdbc:mysql://localhost:3306/padoca";
             conexao = DriverManager.getConnection(url, "root", "123456789");
             
             //Passo 3 - Preparar o comando SQL
             PreparedStatement comandoSQL = 
                 conexao.prepareStatement("UPDATE Vendas SET data_venda=?, total=?, clienteId=? WHERE id=? ");
             
-            comandoSQL.setDate(1, (Date) pObj.getDataVenda());
+            comandoSQL.setDate(1, new java.sql.Date(pObj.getDataVenda().getTime()));
             comandoSQL.setDouble(2, pObj.getTotal());
             comandoSQL.setInt(3, pObj.getClienteId());
             

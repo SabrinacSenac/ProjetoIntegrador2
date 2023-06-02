@@ -42,6 +42,7 @@ Create Table vendas_produto (
 	id				Int Primary Key Auto_Increment,
     venda_id		Int,
     produto_id		Int,
+    qtd				Int,
 Foreign Key (venda_id) References vendas(id),
 Foreign Key (produto_id) References produto(id)
 );

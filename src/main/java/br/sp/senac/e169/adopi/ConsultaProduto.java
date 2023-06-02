@@ -209,21 +209,26 @@ public class ConsultaProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        String nome = txtNome.getText();
+        try {
+            String nome = txtNome.getText();
         
-        ArrayList<Produto> lista = ProdutoDao.listarPorNome(nome);
+            ArrayList<Produto> lista = ProdutoDao.listarPorNome(nome);
         
-        DefaultTableModel modelo =  (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel modelo =  (DefaultTableModel) jTable1.getModel();
          
-        modelo.setRowCount(0);
+            modelo.setRowCount(0);
          
-        for(Produto item : lista){
-            modelo.addRow(new String[]{String.valueOf(item.getId()),
-            String.valueOf(item.getNome()),String.valueOf(item.getDatafabricacao()),
-            String.valueOf(item.getCategoria()),String.valueOf(item.getQuantidade()),
-            String.valueOf(item.getPeso()),String.valueOf(item.getPreco())
+            for(Produto item : lista){
+                modelo.addRow(new String[]{String.valueOf(item.getId()),
+                String.valueOf(item.getNome()),String.valueOf(item.getDatafabricacao()),
+                String.valueOf(item.getCategoria()),String.valueOf(item.getQuantidade()),
+                String.valueOf(item.getPeso()),String.valueOf(item.getPreco())            
+            });}
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocorreu um Erro", "Erro", JOptionPane.ERROR_MESSAGE);
             
-        });}
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**

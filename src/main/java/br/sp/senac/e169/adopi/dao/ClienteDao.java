@@ -104,6 +104,8 @@ public class ClienteDao {
                     //Passo o objeto para a lista de retorno
                     listaRetorno.add(obj);
                     
+                    System.out.println(obj.getId());
+                    
                 }
             
             }
@@ -169,6 +171,55 @@ public class ClienteDao {
         }
         
         return listaRetorno;
+    }
+    
+    public static int ConsultarIdCliente (String cpf) {
+        Connection conexao = null;
+        
+        Cliente obj = new Cliente();
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            //Passo 2 - Abrir a conexão
+            String url = "jdbc:mysql://localhost:3306/padoca";
+            conexao = DriverManager.getConnection(url, "root", "123456789");
+            
+            //Passo 3 - Preparar o comando SQL
+            PreparedStatement comandoSQL = 
+                conexao.prepareStatement("SELECT * FROM Cliente Where cpf=? Limit 1");
+            
+            comandoSQL.setString(1, cpf);
+            
+            ResultSet rs = comandoSQL.executeQuery();
+            
+            if(rs.next()){                
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setDataNascimento(rs.getDate("data_nascimento"));
+                obj.setEmail(rs.getString("email"));
+                obj.setEstadoCivil(rs.getString("estado_civil"));
+                obj.setSexo(rs.getString("sexo"));
+                obj.setCep(rs.getString("cep"));
+                obj.setRua(rs.getString("rua"));
+                obj.setNumero(rs.getInt("numero"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setUf(rs.getString("uf"));   
+                
+                System.out.println(obj.getId());
+            }
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Erro ao carregar o Driver");
+        } catch (SQLException ex) {
+            System.out.println("Erro no SQL");
+            
+            System.out.println(ex.getMessage());
+        }
+        
+        return obj.getId();
     }
     
     public static boolean alterar(Cliente pObj){

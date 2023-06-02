@@ -12,7 +12,17 @@ public class VendaProduto {
     public int id;
     public int vendaId;
     public int produtoId;
+    public int qtd;    
 
+    public VendaProduto() {
+    }
+
+    public VendaProduto(int vendaId, int produtoId, int qtd) {
+        this.vendaId = vendaId;
+        this.produtoId = produtoId;
+        this.qtd = qtd;
+    } 
+    
     public int getId() {
         return id;
     }
@@ -35,5 +45,13 @@ public class VendaProduto {
 
     public void setProdutoId(int produtoId) {
         this.produtoId = produtoId;
+    }
+    
+    public int getQtd() {
+        return qtd;
+    }
+
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
     }
 }

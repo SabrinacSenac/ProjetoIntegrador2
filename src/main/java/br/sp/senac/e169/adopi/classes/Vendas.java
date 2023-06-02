@@ -18,6 +18,15 @@ public class Vendas {
     public double total;
     public int clienteId;
 
+    public Vendas() {
+    }
+
+    public Vendas(Date dataVenda, double total, int clienteId) {
+        this.dataVenda = dataVenda;
+        this.total = total;
+        this.clienteId = clienteId;
+    }
+
     public int getId() {
         return id;
     }
