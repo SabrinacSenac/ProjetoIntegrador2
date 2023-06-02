@@ -115,8 +115,8 @@
                 <Column editable="false" title="Data de Fabricacao" type="java.lang.Object"/>
                 <Column editable="false" title="Categoria" type="java.lang.String"/>
                 <Column editable="false" title="Quantidade" type="java.lang.Integer"/>
-                <Column editable="false" title="Peso" type="java.lang.Float"/>
-                <Column editable="false" title="Preco" type="java.lang.Double"/>
+                <Column editable="false" title="Peso" type="java.lang.String"/>
+                <Column editable="false" title="Preco" type="java.lang.String"/>
               </Table>
             </Property>
           </Properties>

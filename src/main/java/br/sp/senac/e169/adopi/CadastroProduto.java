@@ -26,6 +26,8 @@ public class CadastroProduto extends javax.swing.JFrame {
     }
     
     public CadastroProduto(Produto produto) {
+        initComponents();
+        
         txtNome.setText(String.valueOf(produto.getNome()));
         jdcData.setDate(produto.getDatafabricacao());
         txtCategoria.setText(String.valueOf(produto.getCategoria()));

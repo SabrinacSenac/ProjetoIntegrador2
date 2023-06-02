@@ -68,7 +68,7 @@ public class ConsultaProduto extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
@@ -195,7 +195,7 @@ public class ConsultaProduto extends javax.swing.JFrame {
           
             Produto obj = new Produto(id, nome, dataFabricacao, categoria, quantidade, peso, preco);
        
-            CadastroProduto produto = new CadastroProduto();
+            CadastroProduto produto = new CadastroProduto(obj);
             produto.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocorreu um Erro", "Erro", JOptionPane.ERROR_MESSAGE);
