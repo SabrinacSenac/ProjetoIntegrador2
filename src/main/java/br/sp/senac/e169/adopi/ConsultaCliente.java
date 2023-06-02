@@ -4,11 +4,18 @@
  */
 package br.sp.senac.e169.adopi;
 
+import br.sp.senac.e169.adopi.classes.Cliente;
+import br.sp.senac.e169.adopi.dao.ClienteDao;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author SABRINA
+ * @author ISAAC
  */
 public class ConsultaCliente extends javax.swing.JFrame {
 
@@ -30,11 +37,12 @@ public class ConsultaCliente extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        txtCPF = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -49,10 +57,15 @@ public class ConsultaCliente extends javax.swing.JFrame {
         jLabel2.setText("CPF do Cliente");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCPFActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,6 +103,13 @@ public class ConsultaCliente extends javax.swing.JFrame {
             }
         });
 
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,9 +125,11 @@ public class ConsultaCliente extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(62, 62, 62)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 380, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
+                        .addComponent(btnConsultar)
+                        .addGap(45, 45, 45)
                         .addComponent(btnUpdate)
                         .addGap(32, 32, 32)
                         .addComponent(btnDelete)
@@ -123,13 +145,14 @@ public class ConsultaCliente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnUpdate)
-                            .addComponent(btnDelete))
+                            .addComponent(btnDelete)
+                            .addComponent(btnConsultar))
                         .addGap(25, 25, 25)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
@@ -140,21 +163,98 @@ public class ConsultaCliente extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            
+            ArrayList<Cliente> lista = ClienteDao.listar();
+       
+            DefaultTableModel modelo =  (DefaultTableModel) jTable1.getModel();
+       
+            modelo.setRowCount(0);
+       
+            for(Cliente item : lista){
+                modelo.addRow(new String[]{String.valueOf(item.getId()),
+                String.valueOf(item.getNome()),String.valueOf(item.getCpf()),
+                String.valueOf(item.getTelefone()),String.valueOf(item.getDataNascimento()),
+                String.valueOf(item.getEmail()),String.valueOf(item.getEstadoCivil()),
+                String.valueOf(item.getSexo()),String.valueOf(item.getCep()),String.valueOf(item.getRua()),
+                String.valueOf(item.getNumero()),String.valueOf(item.getBairro()),String.valueOf(item.getCidade()),
+                String.valueOf(item.getUf())
+           });
+       }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocorreu um Erro", "Erro", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_formWindowOpened
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        CadastroCliente cliente = new CadastroCliente();
-        cliente.setVisible(true);
+        try {
+            int linhaSelecionada = jTable1.getSelectedRow();
+        
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            
+            DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+            int id = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
+            String nome = modelo.getValueAt(linhaSelecionada, 1).toString();
+            String cpf = modelo.getValueAt(linhaSelecionada, 2).toString();
+            String telefone = modelo.getValueAt(linhaSelecionada, 3).toString();
+            Date dataNascimento = simpleDateFormat.parse(modelo.getValueAt(linhaSelecionada, 4).toString());
+            String email = modelo.getValueAt(linhaSelecionada, 5).toString();
+            String estadoCivil = modelo.getValueAt(linhaSelecionada, 6).toString();
+            String sexo = modelo.getValueAt(linhaSelecionada, 7).toString();
+            String cep = modelo.getValueAt(linhaSelecionada, 8).toString();
+            String rua = modelo.getValueAt(linhaSelecionada, 9).toString();
+            int numero = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 10).toString());
+            String bairro = modelo.getValueAt(linhaSelecionada, 11).toString();
+            String cidade = modelo.getValueAt(linhaSelecionada, 12).toString();
+            String uf = modelo.getValueAt(linhaSelecionada, 13).toString();
+
+            Cliente obj = new Cliente(id, nome, cpf, telefone, dataNascimento, email, estadoCivil, sexo, cep, rua, numero, bairro, cidade, uf);
+        
+            CadastroCliente novaTela = new CadastroCliente(obj);
+            novaTela.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocorreu um Erro", "Erro", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         CadastroCliente cliente = new CadastroCliente();
         cliente.setVisible(true);
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void txtCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCPFActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        try {
+            String cpf = txtCPF.getText();
+            
+            ArrayList<Cliente> lista = ClienteDao.listarPorCPF(cpf);
+       
+            DefaultTableModel modelo =  (DefaultTableModel) jTable1.getModel();
+       
+            modelo.setRowCount(0);
+       
+            for(Cliente item : lista){
+                modelo.addRow(new String[]{String.valueOf(item.getId()),
+                String.valueOf(item.getNome()),String.valueOf(item.getCpf()),
+                String.valueOf(item.getTelefone()),String.valueOf(item.getDataNascimento()),
+                String.valueOf(item.getEmail()),String.valueOf(item.getEstadoCivil()),
+                String.valueOf(item.getSexo()),String.valueOf(item.getCep()),String.valueOf(item.getRua()),
+                String.valueOf(item.getNumero()),String.valueOf(item.getBairro()),String.valueOf(item.getCidade()),
+                String.valueOf(item.getUf())
+           });
+       }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocorreu um Erro", "Erro", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,12 +292,13 @@ public class ConsultaCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JFormattedTextField txtCPF;
     // End of variables declaration//GEN-END:variables
 }

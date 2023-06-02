@@ -348,6 +348,8 @@ public class CadastroCliente extends javax.swing.JFrame {
        }        
        catch (Exception e) {
            JOptionPane.showMessageDialog(this, "Ocorreu um Erro", "Cadastro de Cliente", JOptionPane.ERROR_MESSAGE);
+           
+           System.out.println(e.getMessage());
        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

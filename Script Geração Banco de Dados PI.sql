@@ -26,8 +26,8 @@ Create Table produto (
     data_fabricacao	DateTime(2),
     categoria		Varchar(50),
     qtd				Int,
-    peso			Decimal(5,2),
-    preco			Decimal(5,2)
+    peso			Float,
+    preco			Double
 );
 
 Create Table vendas (

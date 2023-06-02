@@ -46,6 +46,25 @@ public class Cliente {
         this.uf = uf;
     }
 
+    public Cliente(int id, String nome, String cpf, String telefone, Date dataNascimento, String email, String estadoCivil, String sexo, String cep, String rua, int numero, String bairro, String cidade, String uf) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.dataNascimento = dataNascimento;
+        this.email = email;
+        this.estadoCivil = estadoCivil;
+        this.sexo = sexo;
+        this.cep = cep;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+    }
+    
+    
+
     public int getId() {
         return id;
     }

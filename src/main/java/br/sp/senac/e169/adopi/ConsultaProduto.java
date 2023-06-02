@@ -4,7 +4,14 @@
  */
 package br.sp.senac.e169.adopi;
 
+import br.sp.senac.e169.adopi.classes.Produto;
+import br.sp.senac.e169.adopi.dao.ProdutoDao;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,11 +37,12 @@ public class ConsultaProduto extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -91,6 +99,13 @@ public class ConsultaProduto extends javax.swing.JFrame {
             }
         });
 
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,16 +115,18 @@ public class ConsultaProduto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(55, 55, 55)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                        .addComponent(btnUpdate)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnDelete)
-                        .addGap(38, 38, 38))))
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                        .addComponent(btnConsultar)
+                        .addGap(43, 43, 43)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1)
@@ -118,16 +135,18 @@ public class ConsultaProduto extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(btnUpdate))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnUpdate)
-                        .addComponent(btnDelete))
+                        .addComponent(btnDelete)
+                        .addComponent(btnConsultar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -137,22 +156,75 @@ public class ConsultaProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
         try {
-            
+            ArrayList<Produto> lista = ProdutoDao.listar();
+        
+            DefaultTableModel modelo =  (DefaultTableModel) jTable1.getModel();
+         
+            modelo.setRowCount(0);
+         
+            for(Produto item : lista){
+                modelo.addRow(new String[]{String.valueOf(item.getId()),
+                String.valueOf(item.getNome()),String.valueOf(item.getDatafabricacao()),
+                String.valueOf(item.getCategoria()),String.valueOf(item.getQuantidade()),
+                String.valueOf(item.getPeso()),String.valueOf(item.getPreco())
+            });}
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocorreu um Erro", "Erro", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_formWindowOpened
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        CadastroProduto produto = new CadastroProduto();
-        produto.setVisible(true);
+        try {
+            int linhaSelecionada = jTable1.getSelectedRow();
+        
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        
+            DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+            int id = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
+            String nome = modelo.getValueAt(linhaSelecionada, 1).toString();
+            Date dataFabricacao = simpleDateFormat.parse(modelo.getValueAt(linhaSelecionada, 2).toString());
+            String categoria = modelo.getValueAt(linhaSelecionada, 3).toString();
+            int quantidade = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 4).toString());
+            float peso = Float.parseFloat(modelo.getValueAt(linhaSelecionada, 5).toString());
+            double preco = Double.parseDouble(modelo.getValueAt(linhaSelecionada, 6).toString());
+          
+            Produto obj = new Produto(id, nome, dataFabricacao, categoria, quantidade, peso, preco);
+       
+            CadastroProduto produto = new CadastroProduto();
+            produto.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocorreu um Erro", "Erro", JOptionPane.ERROR_MESSAGE);
+            
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        CadastroProduto produto = new CadastroProduto();
-        produto.setVisible(true);
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        String nome = txtNome.getText();
+        
+        ArrayList<Produto> lista = ProdutoDao.listarPorNome(nome);
+        
+        DefaultTableModel modelo =  (DefaultTableModel) jTable1.getModel();
+         
+        modelo.setRowCount(0);
+         
+        for(Produto item : lista){
+            modelo.addRow(new String[]{String.valueOf(item.getId()),
+            String.valueOf(item.getNome()),String.valueOf(item.getDatafabricacao()),
+            String.valueOf(item.getCategoria()),String.valueOf(item.getQuantidade()),
+            String.valueOf(item.getPeso()),String.valueOf(item.getPreco())
+            
+        });}
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,12 +262,13 @@ public class ConsultaProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

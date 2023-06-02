@@ -5,6 +5,7 @@
 package br.sp.senac.e169.adopi.dao;
 import br.sp.senac.e169.adopi.classes.*;
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -23,7 +24,7 @@ public class ProdutoDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3307/padoca";
+            String url = "jdbc:mysql://localhost:3306/padoca";
             conexao = DriverManager.getConnection(url, "root", "123456789");
             
             //Passo 3 - Preparar o comando SQL
@@ -31,7 +32,7 @@ public class ProdutoDao {
                 conexao.prepareStatement("INSERT INTO Produto (nome,data_fabricacao,categoria,qtd,peso,preco) "
                                         + " VALUES(?,?,?,?,?,?)");
             comandoSQL.setString(1, pObj.getNome());
-            comandoSQL.setDate(2, (Date) pObj.getDatafabricacao());
+            comandoSQL.setDate(2, new java.sql.Date(pObj.getDatafabricacao().getTime()));
             comandoSQL.setString(3, pObj.getCategoria());
             comandoSQL.setInt(4, pObj.getQuantidade());
             comandoSQL.setFloat(5, pObj.getPeso());
@@ -48,7 +49,7 @@ public class ProdutoDao {
         } catch (ClassNotFoundException ex) {
             System.out.println("Erro ao carregar o Driver");
         } catch (SQLException ex) {
-            System.out.println("Erro no SQL");
+            System.out.println(ex.getMessage());
         }
         
         return retorno;
@@ -63,7 +64,7 @@ public class ProdutoDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3307/padoca";
+            String url = "jdbc:mysql://localhost:3306/padoca";
             conexao = DriverManager.getConnection(url, "root", "123456789");
             
             //Passo 3 - Preparar o comando SQL
@@ -82,7 +83,7 @@ public class ProdutoDao {
                     obj.setNome(rs.getString("nome"));
                     obj.setDatafabricacao(rs.getDate("data_fabricacao"));
                     obj.setCategoria(rs.getString("categoria"));
-                    obj.setQuantidade(rs.getInt("quantidade"));
+                    obj.setQuantidade(rs.getInt("qtd"));
                     obj.setPeso(rs.getFloat("peso"));
                     obj.setPreco(rs.getDouble("preco"));
                     
@@ -96,12 +97,62 @@ public class ProdutoDao {
         } catch (ClassNotFoundException ex) {
             System.out.println("Erro ao carregar o Driver");
         } catch (SQLException ex) {
-            System.out.println("Erro no SQL");
+            System.out.println("Erro");
+            
+            System.out.println(ex.getMessage());
         }
         
         return listaRetorno;
         
     }//Fim do listar
+    
+    public static ArrayList<Produto> listarPorNome(String nome) {
+        ArrayList<Produto> listaRetorno = new ArrayList<Produto>();
+        Connection conexao = null;
+        
+        try {
+            //Passo 1 - Carregar o Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            //Passo 2 - Abrir a conexão
+            String url = "jdbc:mysql://localhost:3306/padoca";
+            conexao = DriverManager.getConnection(url, "root", "123456789");
+            
+            //Passo 3 - Preparar o comando SQL
+            PreparedStatement comandoSQL = 
+                conexao.prepareStatement("SELECT * FROM Produto Where nome=?");
+            
+            comandoSQL.setString(1, nome);
+            
+            ResultSet rs = comandoSQL.executeQuery();
+            
+            if(rs!=null){
+                while(rs.next()){
+                 
+                    //Passo os dados do resultset para o objeto
+                    Produto obj = new Produto();
+                    obj.setId(rs.getInt("id"));
+                    obj.setNome(rs.getString("nome"));
+                    obj.setDatafabricacao(rs.getDate("data_fabricacao"));
+                    obj.setCategoria(rs.getString("categoria"));
+                    obj.setQuantidade(rs.getInt("qtd"));
+                    obj.setPeso(rs.getFloat("peso"));
+                    obj.setPreco(rs.getDouble("preco"));
+                    
+                    //Passo o objeto para a lista de retorno
+                    listaRetorno.add(obj);
+                    
+                }
+            
+            }
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Erro ao carregar o Driver");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return listaRetorno;
+    }
     
     public static boolean alterar(Produto pObj){
         boolean retorno = false;
@@ -112,12 +163,12 @@ public class ProdutoDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3307/padoca";
+            String url = "jdbc:mysql://localhost:3306/padoca";
             conexao = DriverManager.getConnection(url, "root", "123456789");
             
             //Passo 3 - Preparar o comando SQL
             PreparedStatement comandoSQL = 
-                conexao.prepareStatement("UPDATE Cliente SET nome=?, data_fabricacao=?, categoria=?, quantidade=?, peso=?, preco=? WHERE id=? ");
+                conexao.prepareStatement("UPDATE Cliente SET nome=?, data_fabricacao=?, categoria=?, qtd=?, peso=?, preco=? WHERE id=? ");
             
             comandoSQL.setString(1, pObj.getNome());
             comandoSQL.setDate(2, (Date) pObj.getDatafabricacao());

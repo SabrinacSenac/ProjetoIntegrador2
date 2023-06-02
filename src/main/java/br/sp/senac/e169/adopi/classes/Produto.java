@@ -17,8 +17,30 @@ public class Produto {
     public Date datafabricacao;
     public String categoria;
     public int quantidade;
-    public float peso;
-    public double preco;
+    public Float peso;
+    public Double preco;
+
+    public Produto() {
+    }
+
+    public Produto(String nome, Date datafabricacao, String categoria, int quantidade, Float peso, Double preco) {
+        this.nome = nome;
+        this.datafabricacao = datafabricacao;
+        this.categoria = categoria;
+        this.quantidade = quantidade;
+        this.peso = peso;
+        this.preco = preco;
+    }
+
+    public Produto(int id, String nome, Date datafabricacao, String categoria, int quantidade, Float peso, Double preco) {
+        this.id = id;
+        this.nome = nome;
+        this.datafabricacao = datafabricacao;
+        this.categoria = categoria;
+        this.quantidade = quantidade;
+        this.peso = peso;
+        this.preco = preco;
+    }    
 
     public int getId() {
         return id;
@@ -64,7 +86,7 @@ public class Produto {
         return peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(Float peso) {
         this.peso = peso;
     }
 
@@ -72,7 +94,7 @@ public class Produto {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 }
